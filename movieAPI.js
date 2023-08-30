@@ -5,7 +5,7 @@ const axios = require('axios');
 // Movie route
 async function getMovies(request, response) {
     let movieSearch = request.query.searchQuery;
-    let url = `https://api.themoviedb.org/3/search/movie?api_key=${process.env.MOVIE_API_KEY}&language=en-US&query=${ovieSearch}&page=1&include_adult=false`;
+    let url = `https://api.themoviedb.org/3/search/movie?api_key=${process.env.MOVIE_API_KEY}&language=en-US&query=${movieSearch}&page=1&include_adult=false`;
     
     try {
         const movieSearch = await axios.get(url);
