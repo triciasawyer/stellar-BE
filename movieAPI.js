@@ -13,13 +13,13 @@ async function getMovies(request, response) {
         // If no search query, allow the fetching of all movies
         url = `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.MOVIE_API_KEY}&language=en-US&page=1`;
     }
-    
+
     try {
         const movieSearchResult = await axios.get(url);
 
         if (movieSearchResult.data.results) {
-        const movieArray = movieSearchResult.data.results.map(movie => new Movie(movie));
-        response.status(200).send(movieArray);
+            const movieArray = movieSearchResult.data.results.map(movie => new Movie(movie));
+            response.status(200).send(movieArray);
         } else {
             response.status(404).send('No movies found');
         }
