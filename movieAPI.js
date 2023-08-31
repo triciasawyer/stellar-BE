@@ -5,12 +5,24 @@ const axios = require('axios');
 // Movie route
 async function getMovies(request, response) {
     let movieSearch = request.query.searchQuery;
-    let url = `https://api.themoviedb.org/3/search/movie?api_key=${process.env.MOVIE_API_KEY}&language=en-US&query=${movieSearch}&page=1&include_adult=false`;
+    let url;
+
+    if (movieSearch) {
+        url = `https://api.themoviedb.org/3/search/movie?api_key=${process.env.MOVIE_API_KEY}&language=en-US&query=${movieSearch}&page=1&include_adult=false`;
+    } else {
+        // If no search query, allow the fetching of all movies
+        url = `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.MOVIE_API_KEY}&language=en-US&page=1`;
+    }
     
     try {
-        const movieSearch = await axios.get(url);
-        const movieArray = movieSearch.data.results.map(movie => new Movie(movie));
+        const movieSearchResult = await axios.get(url);
+
+        if (movieSearchResult.data.results) {
+        const movieArray = movieSearchResult.data.results.map(movie => new Movie(movie));
         response.status(200).send(movieArray);
+        } else {
+            response.status(404).send('No movies found');
+        }
     } catch (error) {
         console.error('Error fetching movies:', error);
         response.status(500).send('Error fetching movies');
