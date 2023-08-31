@@ -2,7 +2,6 @@
 
 const axios = require('axios');
 
-// Movie route
 async function getMovies(request, response) {
     let movieSearch = request.query.searchQuery;
     let url;

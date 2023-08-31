@@ -4,7 +4,6 @@ console.log('server running');
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
-
 const app = express();
 
 app.use(cors());
@@ -25,9 +24,16 @@ const getMovies = require('./movieAPI.js');
 app.get('/', (request, response) => {
   response.send('Welcome to the Movie Streaming Service API!');
 });
-
 // Movie route
 app.get('/movies', getMovies);
+
+// Import tv series functions
+const getTVSeries = require('./tvSeriesAPI.js');
+
+// TV series route
+app.get('/series', getTVSeries);
+
+
 
 app.get('*', (request, response) => {
   response.send('The route was not found. Error 404');
