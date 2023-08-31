@@ -18,21 +18,23 @@ mongoose.connect(
 
 const PORT = process.env.PORT || 5005;
 
-// Import movie-api functions
-const getMovies = require('./movieAPI.js');
-
 app.get('/', (request, response) => {
   response.send('Welcome to the Movie Streaming Service API!');
 });
+
+// Import movie-api functions
+const getMovies = require('./movieAPI.js');
 // Movie route
 app.get('/movies', getMovies);
 
+
 // Import tv series functions
 const getTVSeries = require('./tvSeriesAPI.js');
-
 // TV series route
 app.get('/series', getTVSeries);
 
+const getKids = require('./kidsAPI.js');
+app.get('/kids', getKids);
 
 
 app.get('*', (request, response) => {
