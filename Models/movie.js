@@ -8,7 +8,7 @@ const movieSchema = new Schema({
   overview: { type: String, require: true },
   imageUrl: { type: String, require: true },
   releasedOn: { type: String, require: true },
-  trailerKey: { type: String }
+  // trailerKey: { type: String }
 });
 
 const MovieModel = mongoose.model('Movie', movieSchema);

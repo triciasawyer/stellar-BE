@@ -4,6 +4,7 @@ const axios = require('axios');
 
 async function getKids(request, response) {
     let kidSearch = request.query.searchQuery;
+    // let page = request.query.page || 1;
     let url;
 
     if (kidSearch) {
