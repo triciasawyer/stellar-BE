@@ -7,7 +7,7 @@ async function getKids(request, response) {
     let url;
 
     if (kidSearch) {
-        url = `https//api.themoviedb.org/3/search/movie?api_key=${process.env.MOVIE_API_KEY}&language=en-US&certification_country=US&certification.lte=G&with_genres=16&query=${kidSearch}&page=1`;
+        url = `https://api.themoviedb.org/3/search/movie?api_key=${process.env.MOVIE_API_KEY}&language=en-US&certification_country=US&certification.lte=G&with_genres=16&query=${kidSearch}&page=1`;
     } else {
         // If no search query, allow the fetching of all movies
         url = `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.MOVIE_API_KEY}&language=en-US&certification_country=US&certification.lte=G&with_genres=16&page=1`;
