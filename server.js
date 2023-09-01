@@ -5,6 +5,7 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const app = express();
+const axios = require('axios');
 
 app.use(cors());
 
@@ -35,6 +36,22 @@ app.get('/series', getTVSeries);
 
 const getKids = require('./kidsAPI.js');
 app.get('/kids', getKids);
+
+const MovieModel = require('./Models/movie.js');
+
+app.get('/movies/:id', async (request, response) => {
+  try {
+    const movieId = request.params.id;
+    const movie = await MovieModel.findById(movieId);
+    if (!movie) {
+      return response.status(404).json({ message: 'Movie not found' });
+    }
+    response.json(movie);
+  } catch (error) {
+    console.error('Error fetching movie details:', error);
+    response.status(500).json({ message: 'Internal server error' });
+  }
+});
 
 
 app.get('*', (request, response) => {

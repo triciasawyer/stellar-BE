@@ -34,6 +34,8 @@ class Movie {
         this.overview = movieObject.overview;
         this.imageUrl = `https://image.tmdb.org/t/p/w500${movieObject.poster_path}`;
         this.releasedOn = movieObject.release_date;
+        // this.trailerKey = movieObject.trailerKey;
+
     }
 }
 
