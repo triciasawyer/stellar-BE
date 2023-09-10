@@ -5,7 +5,7 @@ const axios = require('axios');
 async function getMovies(req, res) {
     let movieSearch = req.query.searchQuery;
     let category = req.query.category;
-    
+
     let url;
 
     // edit url to get popular movies (may make seperate component for that)
@@ -26,8 +26,8 @@ async function getMovies(req, res) {
         } else {
             res.status(404).send('No movies found');
         }
-    } catch (error) {
-        console.error('Error fetching movies:', error);
+    } catch (err) {
+        console.error('Error fetching movies:', err);
         res.status(500).send('Error fetching movies');
     }
 }
