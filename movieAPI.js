@@ -9,10 +9,6 @@ async function getMovies(req, res) {
     let url;
 
     if (category === 'popular') {
-        const currentYear = new Date().getFullYear(); // Get the current year
-        const minDate = `${currentYear}-01-01`; // Set min_date to the beginning of the current year
-        const currentDate = new Date().toISOString().split('T')[0]; // Set max_date to the current date
-
         url = `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.MOVIE_API_KEY}&language=en-US&page=1&sort_by=release_date.desc&primary_release_year=2023`;
     } else if (movieSearch) {
         url = `https://api.themoviedb.org/3/search/movie?api_key=${process.env.MOVIE_API_KEY}&language=en-US&query=${movieSearch}&page=1&include_adult=false`;
