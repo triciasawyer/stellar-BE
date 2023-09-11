@@ -26,8 +26,10 @@ async function getTrendingActors(req, res) {
 
 class Actor {
     constructor(actorObject) {
+        this.id = actorObject.id;
         this.name = actorObject.name;
         this.profileImageUrl = `https://image.tmdb.org/t/p/w500${actorObject.profile_path}`;
+        this.biography = actorObject.biography;
     }
 }
 
