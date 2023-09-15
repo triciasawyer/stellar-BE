@@ -9,7 +9,6 @@ async function getTVSeries(request, response) {
     if (seriesSearch) {
         url = `https://api.themoviedb.org/3/search/tv?api_key=${process.env.MOVIE_API_KEY}&language=en-US&query=${seriesSearch}&page=1&include_adult=false`;
     } else {
-        // If no search query, allow the fetching of all movies
         url = `https://api.themoviedb.org/3/discover/tv?api_key=${process.env.MOVIE_API_KEY}&language=en-US&page=1`;
     }
 
@@ -36,5 +35,25 @@ class Series {
         this.releasedOn = seriesObject.release_date;
     }
 }
+
+// async function getPopTVSeries(request, response) {
+//     let url = `https://api.themoviedb.org/3/tv/popular?api_key=${process.env.MOVIE_API_KEY}&language=en-US&page=1`;
+
+//     try {
+//         const popularSeriesResult = await axios.get(url);
+
+//         if (popularSeriesResult.data.results) {
+//             const popularSeriesArray = popularSeriesResult.data.results.map(serie => new Series(serie));
+//             response.status(200).send(popularSeriesArray);
+//         } else {
+//             response.status(404).send('No popular TV series found');
+//         }
+//     } catch (error) {
+//         console.error('Error fetching popular TV series:', error);
+//         response.status(500).send('Error fetching popular TV series');
+//     }
+// }
+
+// module.exports = { getTVSeries, getPopTVSeries };
 
 module.exports = getTVSeries;

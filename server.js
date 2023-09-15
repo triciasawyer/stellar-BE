@@ -34,8 +34,14 @@ const getTVSeries = require('./tvSeriesAPI.js');
 // TV series route
 app.get('/series', getTVSeries);
 
+// const getPopTVSeries = require('./tvSeriesAPI.js');
+// app.get('/series', getPopTVSeries);
+
 const getKids = require('./kidsAPI.js');
 app.get('/kids', getKids);
+
+const getTrendingActors = require('./trendingActors.js');
+app.get('/trending-actors', getTrendingActors);
 
 const MovieModel = require('./Models/movie.js');
 
