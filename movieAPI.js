@@ -41,7 +41,6 @@ class Movie {
             ? `https://image.tmdb.org/t/p/w500${movieObject.poster_path}`
             : ''; this.releasedOn = movieObject.release_date;
         // this.trailerKey = movieObject.trailerKey;
-
     }
 }
 

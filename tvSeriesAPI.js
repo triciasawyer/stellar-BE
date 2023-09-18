@@ -2,28 +2,32 @@
 
 const axios = require('axios');
 
-async function getTVSeries(request, response) {
-    let seriesSearch = request.query.searchQuery;
+async function getTVSeries(req, res) {
+    let seriesSearch = req.query.searchQuery;
+    let category = req.query.category;
     let url;
 
     if (seriesSearch) {
         url = `https://api.themoviedb.org/3/search/tv?api_key=${process.env.MOVIE_API_KEY}&language=en-US&query=${seriesSearch}&page=1&include_adult=false`;
+        // This isn't different than the regular series displaying. Need to check url
+    } else if (category === 'popular') {
+        url = `https://api.themoviedb.org/3/discover/tv?api_key=${process.env.MOVIE_API_KEY}&language=en-US&page=4&sort_by=popularity.desc`;
     } else {
-        url = `https://api.themoviedb.org/3/discover/tv?api_key=${process.env.MOVIE_API_KEY}&language=en-US&page=1`;
-    }
+        url = `https://api.themoviedb.org/3/discover/tv?api_key=${process.env.MOVIE_API_KEY}&language=en-US&page=2`;
+    } 
 
     try {
         const seriesSearchResult = await axios.get(url);
 
         if (seriesSearchResult.data.results) {
             const seriesArray = seriesSearchResult.data.results.map(serie => new Series(serie));
-            response.status(200).send(seriesArray);
+            res.status(200).send(seriesArray);
         } else {
-            response.status(404).send('No tv series found');
+            res.status(404).send('No tv series found');
         }
     } catch (error) {
         console.error('Error fetching tv series:', error);
-        response.status(500).send('Error fetching tv series');
+        res.status(500).send('Error fetching tv series');
     }
 }
 
