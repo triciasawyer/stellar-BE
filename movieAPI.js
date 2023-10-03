@@ -35,15 +35,36 @@ async function getMovies(req, res) {
     }
 }
 
+
+// Define a function to get a movie by ID
+// async function getMovieById(req, res) {
+// Get the movie ID from the route parameters
+// const movieId = req.params.id;
+
+// Make a request to TMDb API using the movieId
+//     const url = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${process.env.MOVIE_API_KEY}&language=en-US`;
+
+//     try {
+//       const response = await axios.get(url);
+//       const movieData = new Movie(response.data);
+//       res.status(200).send(movieData);
+//     } catch (err) {
+//       console.error('Error fetching movie by ID:', err);
+//       res.status(500).send('Error fetching movie by ID');
+//     }
+//   }
+
+
 class Movie {
     constructor(movieObject) {
         this.title = movieObject.title;
         this.overview = movieObject.overview;
         this.imageUrl = movieObject.poster_path
             ? `https://image.tmdb.org/t/p/w500${movieObject.poster_path}`
-            : ''; this.releasedOn = movieObject.release_date;
-        // this.trailerKey = movieObject.trailerKey;
+            : '';
+        this.releasedOn = movieObject.release_date;
     }
 }
 
+// module.exports = { getMovies, getMovieById };
 module.exports = getMovies;

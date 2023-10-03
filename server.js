@@ -11,16 +11,14 @@ app.use(cors());
 
 const mongoose = require('mongoose');
 
-mongoose.connect(
-  process.env.URL_DB
-)
+mongoose.connect(process.env.URL_DB)
   .then(() => console.log('Mongo DB is connected!'))
   .catch(e => console.log(e));
 
 const PORT = process.env.PORT || 5005;
 
-app.get('/', (request, response) => {
-  response.send('Welcome to the Movie Streaming Service API!');
+app.get('/', (req, res) => {
+  res.send('Welcome to the Movie Streaming Service API!');
 });
 
 // Import movie-api functions
@@ -59,9 +57,11 @@ app.get('/movies/:id', async (request, response) => {
   }
 });
 
+// const router = require('./routes');
+// app.use('/api', router);
 
-app.get('*', (request, response) => {
-  response.send('The route was not found. Error 404');
+app.get('*', (req, res) => {
+  res.send('The route was not found. Error 404');
 });
 
 app.listen(PORT, () => console.log(`Listening on Port ${PORT}`));
