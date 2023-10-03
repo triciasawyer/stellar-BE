@@ -9,7 +9,9 @@ async function getMovies(req, res) {
     let url;
 
     if (category === 'playing') {
-        url = `https://api.themoviedb.org/3/movie/now_playing?api_key=${process.env.MOVIE_API_KEY}&language=en-US&page=3`;
+        url = `https://api.themoviedb.org/3/movie/now_playing?api_key=${process.env.MOVIE_API_KEY}&language=en-US&page=2`;
+    } else if (category === 'playing2') {
+        url = `https://api.themoviedb.org/3/movie/now_playing?api_key=${process.env.MOVIE_API_KEY}&language=en-US&page=3`
     } else if (category === 'popular') {
         url = `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.MOVIE_API_KEY}&language=en-US&page=1&sort_by=popularity.desc`;
     } else if (movieSearch) {
